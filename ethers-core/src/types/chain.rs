@@ -163,6 +163,8 @@ pub enum Chain {
     #[strum(to_string = "zksync-testnet")]
     #[serde(alias = "zksync_testnet")]
     ZkSyncTestnet = 280,
+
+    KromaDevnet = 901,
 }
 
 // === impl Chain ===
@@ -285,7 +287,7 @@ impl Chain {
             Polygon | PolygonMumbai => 2_100,
             Moonbeam | Moonriver => 12_500,
             BinanceSmartChain | BinanceSmartChainTestnet => 3_000,
-            Avalanche | AvalancheFuji => 2_000,
+            Avalanche | AvalancheFuji | KromaDevnet => 2_000,
             Fantom | FantomTestnet => 1_200,
             Cronos | CronosTestnet | Canto | CantoTestnet => 5_700,
             Evmos | EvmosTestnet => 1_900,
@@ -339,7 +341,8 @@ impl Chain {
             ZkSync |
             ZkSyncTestnet |
             PolygonZkEvm |
-            PolygonZkEvmTestnet => true,
+            PolygonZkEvmTestnet |
+            KromaDevnet => true,
 
             // Known EIP-1559 chains
             Mainnet |
@@ -541,7 +544,7 @@ impl Chain {
                 ("https://explorer.goerli.linea.build/api", "https://explorer.goerli.linea.build/")
             }
 
-            AnvilHardhat | Dev | Morden | MoonbeamDev | FilecoinMainnet => {
+            AnvilHardhat | Dev | Morden | MoonbeamDev | FilecoinMainnet | KromaDevnet => {
                 // this is explicitly exhaustive so we don't forget to add new urls when adding a
                 // new chain
                 return None
@@ -623,7 +626,8 @@ impl Chain {
             ZkSyncTestnet |
             FilecoinMainnet |
             LineaTestnet |
-            FilecoinHyperspaceTestnet => return None,
+            FilecoinHyperspaceTestnet |
+            KromaDevnet => return None,
         };
 
         Some(api_key_name)
