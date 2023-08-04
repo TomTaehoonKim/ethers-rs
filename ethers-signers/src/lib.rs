@@ -2,7 +2,9 @@
 #![deny(unsafe_code, rustdoc::broken_intra_doc_links)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-mod wallet;
+pub mod wallet;
+use coins_bip32::prelude::SigningKey;
+use coins_bip39::English;
 pub use wallet::{MnemonicBuilder, Wallet, WalletError};
 
 /// Re-export the BIP-32 crate so that wordlists can be accessed conveniently.
@@ -49,6 +51,16 @@ use std::error::Error;
 /// Applies [EIP155](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md)
 pub fn to_eip155_v<T: Into<u8>>(recovery_id: T, chain_id: u64) -> u64 {
     (recovery_id.into() as u64) + 35 + chain_id * 2
+}
+
+pub fn get_wallet(index: u32) -> Wallet<SigningKey> {
+    MnemonicBuilder::<English>::default()
+        .phrase("test test test test test test test test test test test junk")
+        .index(index)
+        .expect("invalid index")
+        .build()
+        .expect("cannot build wallet from mnemonic")
+        .with_chain_id(901u64)
 }
 
 /// Trait for signing transactions and messages
