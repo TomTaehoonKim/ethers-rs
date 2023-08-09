@@ -1,0 +1,88 @@
+project_structure:
+    build: build
+    contracts: contracts
+    interfaces: interfaces
+    reports: reports
+    scripts: scripts
+    tests: tests
+
+networks:
+    default: development
+    development:
+        gas_limit: max
+        gas_buffer: 1.2
+        gas_price: 0
+        max_fee: null
+        priority_fee: null
+        reverting_tx_gas_limit: max
+        default_contract_owner: true
+        cmd_settings:
+            port: 8545
+            gas_limit: 20000000
+            accounts: 100
+            chain_id: 1337
+            evm_version: istanbul
+            mnemonic: brownie
+            block_time: 0
+            default_balance: 1000000
+            # unlock: null
+
+    live:
+        gas_limit: auto
+        gas_buffer: 1.2
+        gas_price: auto
+        max_fee: null
+        priority_fee: null
+        reverting_tx_gas_limit: false
+        default_contract_owner: false
+
+compiler:
+    evm_version: null
+    solc:
+        version: 0.7.6
+        optimizer:
+            enabled: true
+            runs: 1
+        remappings:
+            - "@openzeppelin=OpenZeppelin/openzeppelin-contracts@3.4.2"
+            - "@uniswap/v3-core=Uniswap/v3-core@1.0.0"
+            - "@uniswap/v3-periphery=Uniswap/v3-periphery@1.0.0"
+            - "@uniswap/lib=Uniswap/solidity-lib@4.0.0-alpha"
+            - "base64-sol=Brechtpd/base64@1.1.0"
+    vyper:
+        version: null
+
+console:
+    show_colors: true
+    color_style: monokai
+    auto_suggest: true
+    completions: true
+    editing_mode: emacs
+
+reports:
+    exclude_paths: null
+    exclude_contracts: null
+    only_include_project: true
+
+hypothesis:
+    deadline: null
+    max_examples: 50
+    report_multiple_bugs: False
+    stateful_step_count: 10
+    phases:
+        explicit: true
+        reuse: true
+        generate: true
+        target: true
+        shrink: true
+
+autofetch_sources: false
+dependencies:
+    - OpenZeppelin/openzeppelin-contracts@3.4.2
+    - Uniswap/v3-core@1.0.0
+    - Uniswap/v3-periphery@1.0.0
+    - Uniswap/solidity-lib@4.0.0-alpha
+    - Brechtpd/base64@1.1.0
+
+
+dev_deployment_artifacts: false
